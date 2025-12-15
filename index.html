@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Secret Sonata Picker</title>
+
+  <!-- Vue 3 CDN -->
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="app">
+    <!-- LOGIN SCREEN -->
+    <div v-if="!loggedIn" class="login-box">
+      <h1>Secret Santa Login</h1>
+
+      <input
+        type="text"
+        placeholder="Username"
+        v-model="username"
+      />
+
+      <input
+        type="password"
+        placeholder="Password"
+        v-model="password"
+      />
+
+      <button @click="login">Log In</button>
+
+      <p class="error" v-if="error">{{ error }}</p>
+    </div>
+
+    <!-- SECRET PAGE -->
+    <div v-else class="secret-box">
+      <h1>Welcome, {{ currentUser.name }} </h1>
+      <p>Your secret sonata website is:</p>
+
+      <a :href="currentUser.website" target="_blank">
+        {{ currentUser.website }}
+      </a>
+
+      <button class="logout" @click="logout">Log Out</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
