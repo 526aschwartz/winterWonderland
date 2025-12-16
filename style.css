@@ -1,56 +1,130 @@
+/* Body */
 body {
-  background: #111;
-  color: white;
-  font-family: Arial, sans-serif;
+  background: linear-gradient(to bottom, #e0f7fa, #b2ebf2); /* soft winter blues */
+  color: #1a1a1a;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
+  margin: 0;
 }
 
+/* Boxes */
 .login-box,
 .secret-box {
-  background: #1e1e1e;
+  background: rgba(255, 255, 255, 0.85);
   padding: 30px;
-  border-radius: 10px;
-  width: 300px;
+  border-radius: 20px;
+  width: 360px;
   text-align: center;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  border: 2px solid #ffd54f; /* warm gold accent */
 }
 
+/* Headings */
+h1 {
+  color: #0277bd; /* deep winter blue */
+  text-shadow: 1px 1px #fff;
+  margin-bottom: 20px;
+}
+
+/* Inputs */
 input {
   width: 100%;
   padding: 10px;
   margin: 8px 0;
-  border-radius: 5px;
-  border: none;
+  border-radius: 10px;
+  border: 2px solid #4fc3f7; /* icy blue border */
+  background: rgba(255,255,255,0.9);
+  color: #0277bd;
+  font-size: 1em;
 }
 
+/* Buttons */
 button {
   width: 100%;
-  padding: 10px;
+  padding: 12px;
   margin-top: 10px;
-  background: #6a5acd;
-  color: white;
+  background: #ffb74d; /* soft gold */
+  color: #1a1a1a;
   border: none;
-  border-radius: 5px;
+  border-radius: 10px;
   cursor: pointer;
+  font-weight: bold;
+  font-size: 1em;
+  transition: 0.3s;
 }
 
 button:hover {
-  background: #7b6ee6;
+  background: #ffd54f; /* brighter gold on hover */
 }
 
+/* Error messages */
 .error {
-  color: #ff6b6b;
+  color: #e53935; /* subtle red for errors */
   margin-top: 10px;
 }
 
-a {
-  color: #87cefa;
-  word-break: break-all;
+/* Participant list */
+ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 15px;
 }
 
+li {
+  background: rgba(255,255,255,0.7);
+  margin: 6px 0;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #4fc3f7; /* icy border */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold;
+  color: #0277bd;
+}
+
+/* Participant remove button */
+ul li button {
+  background: #81d4fa; /* lighter winter blue */
+  padding: 3px 7px;
+  font-size: 0.8em;
+  border-radius: 5px;
+}
+
+/* Assigned Secret Santa names */
+.name {
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #ffb74d; /* gold accent */
+  margin-bottom: 10px;
+}
+
+/* Wishlist items */
+li ul {
+  padding-left: 15px;
+  margin-top: 5px;
+  list-style-type: disc;
+  color: #0277bd;
+}
+
+li ul li {
+  background: none;
+  border: none;
+  padding: 2px 0;
+  font-weight: normal;
+  color: #01579b; /* dark winter blue */
+}
+
+/* Start over / logout button */
 .logout {
   margin-top: 20px;
-  background: #ff5555;
+  background: #29b6f6; /* icy blue */
+  color: #fff;
+}
+
+.logout:hover {
+  background: #03a9f4;
 }

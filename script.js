@@ -3,70 +3,58 @@ const { createApp } = Vue;
 createApp({
   data() {
     return {
-      username: "",
-      password: "",
-      error: "",
-      loggedIn: false,
-      currentUser: null,
-
-      // "Database" of users
-      users: [
-        {
-          username: "alyson",
-          password: "music123",
-          name: "Alyson",
-          website: "https://www.classicsforkids.com"
-        },
-        {
-          username: "alex",
-          password: "sonata456",
-          name: "Alex",
-          website: "https://www.musictheory.net"
-        },
-        {
-          username: "jordan",
-          password: "piano789",
-          name: "Jordan",
-          website: "https://www.muted.io"
-        }
-      ]
+      participants: [],
+      newParticipant: { name: "", wishlist: "" },
+      started: false
     };
   },
 
-  mounted() {
-    // Keep user logged in on refresh
-    const savedUser = localStorage.getItem("secretUser");
-    if (savedUser) {
-      this.currentUser = JSON.parse(savedUser);
-      this.loggedIn = true;
-    }
-  },
-
   methods: {
-    login() {
-      this.error = "";
+    addParticipant() {
+      const name = this.newParticipant.name.trim();
+      const wishlist = this.newParticipant.wishlist
+        .split(",")
+        .map(item => item.trim())
+        .filter(item => item);
 
-      const user = this.users.find(
-        u =>
-          u.username === this.username &&
-          u.password === this.password
-      );
-
-      if (user) {
-        this.loggedIn = true;
-        this.currentUser = user;
-        localStorage.setItem("secretUser", JSON.stringify(user));
-      } else {
-        this.error = "Invalid username or password";
+      if (!name) {
+        alert("Please enter a name");
+        return;
       }
+
+      this.participants.push({ name, wishlist, assignedTo: null });
+      this.newParticipant.name = "";
+      this.newParticipant.wishlist = "";
     },
 
-    logout() {
-      this.loggedIn = false;
-      this.currentUser = null;
-      this.username = "";
-      this.password = "";
-      localStorage.removeItem("secretUser");
+    removeParticipant(index) {
+      this.participants.splice(index, 1);
+    },
+
+    startGame() {
+      if (this.participants.length < 2) {
+        alert("You need at least 2 participants");
+        return;
+      }
+
+      // Shuffle array for random assignment
+      const shuffled = [...this.participants];
+      for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+      }
+
+      // Assign Secret Santa
+      for (let i = 0; i < this.participants.length; i++) {
+        this.participants[i].assignedTo = shuffled[(i + 1) % shuffled.length];
+      }
+
+      this.started = true;
+    },
+
+    resetGame() {
+      this.participants.forEach(p => (p.assignedTo = null));
+      this.started = false;
     }
   }
 }).mount("#app");

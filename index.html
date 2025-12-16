@@ -2,46 +2,41 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Secret Sonata Picker</title>
-
-  <!-- Vue 3 CDN -->
+  <title>Secret Santa Picker</title>
   <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div id="app">
-    <!-- LOGIN SCREEN -->
-    <div v-if="!loggedIn" class="login-box">
-      <h1>Secret Santa Login</h1>
+    <!-- Add participants -->
+    <div v-if="!started" class="login-box">
+      <h1>🎄 Secret Santa Setup</h1>
 
-      <input
-        type="text"
-        placeholder="Username"
-        v-model="username"
-      />
+      <input type="text" placeholder="Your Name" v-model="newParticipant.name" />
+      <input type="text" placeholder="Gift Wishlist (comma separated)" v-model="newParticipant.wishlist" />
+      <button @click="addParticipant">Add Participant</button>
 
-      <input
-        type="password"
-        placeholder="Password"
-        v-model="password"
-      />
+      <ul>
+        <li v-for="(p, index) in participants" :key="index">
+          {{ p.name }} - Wishlist: {{ p.wishlist.join(", ") }}
+          <button @click="removeParticipant(index)">Remove</button>
+        </li>
+      </ul>
 
-      <button @click="login">Log In</button>
-
-      <p class="error" v-if="error">{{ error }}</p>
+      <button v-if="participants.length > 1" @click="startGame">Start Secret Santa</button>
     </div>
 
-    <!-- SECRET PAGE -->
+    <!-- Secret Santa assignments -->
     <div v-else class="secret-box">
-      <h1>Welcome, {{ currentUser.name }} </h1>
-      <p>Your secret sonata website is:</p>
-
-      <a :href="currentUser.website" target="_blank">
-        {{ currentUser.website }}
-      </a>
-
-      <button class="logout" @click="logout">Log Out</button>
+      <h1>🎅 Secret Santa Assignments</h1>
+      <ul>
+        <li v-for="(p, index) in participants" :key="index">
+          {{ p.name }} → {{ p.assignedTo.name }}  
+          <br/>
+          Wishlist: {{ p.assignedTo.wishlist.join(", ") }}
+        </li>
+      </ul>
+      <button @click="resetGame">Start Over</button>
     </div>
   </div>
 

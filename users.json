@@ -1,0 +1,23 @@
+[
+  {
+    "username": "alyson",
+    "password": "music123",
+    "name": "Alyson",
+    "assignedTo": "Alex",
+    "wishlist": ["Sheet music", "Headphones", "Music stand"]
+  },
+  {
+    "username": "alex",
+    "password": "sonata456",
+    "name": "Alex",
+    "assignedTo": "Jordan",
+    "wishlist": ["Piano book", "Metronome", "Gift cards"]
+  },
+  {
+    "username": "jordan",
+    "password": "piano789",
+    "name": "Jordan",
+    "assignedTo": "Alyson",
+    "wishlist": ["Vinyl records", "Bluetooth speaker", "Concert tickets"]
+  }
+]
