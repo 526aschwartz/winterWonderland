@@ -7,10 +7,11 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  
+
   <div class="page-title">
-    Secret Santa Picker
+    ❄️ Secret Santa Picker 🎁
   </div>
+
   <div id="app">
     <!-- Add participants -->
     <div v-if="!started" class="login-box">
@@ -32,15 +33,37 @@
 
     <!-- Secret Santa assignments -->
     <div v-else class="secret-box">
-      <h1>🎅 Secret Santa Assignments</h1>
-      <ul>
-        <li v-for="(p, index) in participants" :key="index">
-          {{ p.name }} → {{ p.assignedTo.name }}  
-          <br/>
-          Wishlist: {{ p.assignedTo.wishlist.join(", ") }}
-        </li>
-      </ul>
-      <button @click="resetGame">Start Over</button>
+      <h1>🎅 Pick Your Name</h1>
+      <p class="subtitle">Click your name to see who you have</p>
+
+      <div class="name-grid">
+        <div
+          v-for="(p, index) in participants"
+          :key="index"
+          class="name-card"
+          @click="selectParticipant(p)"
+        >
+          {{ p.name }}
+        </div>
+      </div>
+
+      <!-- Reveal box -->
+      <div v-if="selectedParticipant" class="reveal-box">
+        <h2>🎁 Secret Santa Assignment</h2>
+        <p class="reveal-name">
+          You (<span class="your-name">{{ selectedParticipant.name }}</span>) are Secret Santa for: 
+          <span class="assigned-name">{{ selectedParticipant.assignedTo.name }}</span>
+        </p>
+
+        <h3>Wishlist</h3>
+        <ul>
+          <li v-for="item in selectedParticipant.assignedTo.wishlist" :key="item">
+            {{ item }}
+          </li>
+        </ul>
+      </div>
+
+      <button class="logout" @click="resetGame">Start Over</button>
     </div>
   </div>
 

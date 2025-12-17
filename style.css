@@ -10,6 +10,17 @@ body {
   margin: 0;
 }
 
+/* Page Title */
+.page-title {
+  position: absolute;
+  top: 20px;
+  font-size: 2.6em;
+  font-weight: 700;
+  color: #0277bd; /* winter blue */
+  letter-spacing: 2px;
+  text-shadow: 2px 2px 0 #ffffff, 0 0 10px rgba(255,255,255,0.8);
+}
+
 /* Boxes */
 .login-box,
 .secret-box {
@@ -19,12 +30,12 @@ body {
   width: 360px;
   text-align: center;
   box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-  border: 2px solid #ffd54f; /* warm gold accent */
+  border: 2px solid #ffd54f; /* subtle gold */
 }
 
 /* Headings */
 h1 {
-  color: #0277bd; /* deep winter blue */
+  color: #0277bd;
   text-shadow: 1px 1px #fff;
   margin-bottom: 20px;
 }
@@ -35,7 +46,7 @@ input {
   padding: 10px;
   margin: 8px 0;
   border-radius: 10px;
-  border: 2px solid #4fc3f7; /* icy blue border */
+  border: 2px solid #4fc3f7;
   background: rgba(255,255,255,0.9);
   color: #0277bd;
   font-size: 1em;
@@ -46,7 +57,7 @@ button {
   width: 100%;
   padding: 12px;
   margin-top: 10px;
-  background: #ffb74d; /* soft gold */
+  background: #ffb74d;
   color: #1a1a1a;
   border: none;
   border-radius: 10px;
@@ -57,13 +68,7 @@ button {
 }
 
 button:hover {
-  background: #ffd54f; /* brighter gold on hover */
-}
-
-/* Error messages */
-.error {
-  color: #e53935; /* subtle red for errors */
-  margin-top: 10px;
+  background: #ffd54f;
 }
 
 /* Participant list */
@@ -78,7 +83,7 @@ li {
   margin: 6px 0;
   padding: 10px;
   border-radius: 10px;
-  border: 1px solid #4fc3f7; /* icy border */
+  border: 1px solid #4fc3f7;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -86,66 +91,66 @@ li {
   color: #0277bd;
 }
 
-/* Participant remove button */
 ul li button {
-  background: #81d4fa; /* lighter winter blue */
+  background: #81d4fa;
   padding: 3px 7px;
   font-size: 0.8em;
   border-radius: 5px;
 }
 
-/* Assigned Secret Santa names */
-.name {
-  font-size: 1.2em;
+/* Subtitle */
+.subtitle {
+  font-size: 0.95em;
+  color: #555;
+  margin-bottom: 15px;
+}
+
+/* Grid of names */
+.name-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+/* Name cards */
+.name-card {
+  background: #e3f2fd;
+  padding: 12px;
+  border-radius: 12px;
+  text-align: center;
   font-weight: bold;
-  color: #ffb74d; /* gold accent */
+  color: #0277bd;
+  cursor: pointer;
+  transition: 0.3s;
+  border: 2px solid #b3e5fc;
+}
+
+.name-card:hover {
+  background: #bbdefb;
+  transform: translateY(-2px);
+}
+
+/* Reveal box */
+.reveal-box {
+  background: #ffffff;
+  border-radius: 15px;
+  padding: 20px;
+  border: 2px solid #ffd54f;
+  margin-top: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+/* Reveal participant names */
+.reveal-name {
+  font-size: 1.4em;
+  font-weight: bold;
+  color: #ffb74d; /* gold accent for visibility */
   margin-bottom: 10px;
 }
 
-/* Wishlist items */
-li ul {
-  padding-left: 15px;
-  margin-top: 5px;
-  list-style-type: disc;
-  color: #0277bd;
-}
-
-li ul li {
-  background: none;
-  border: none;
-  padding: 2px 0;
-  font-weight: normal;
-  color: #01579b; /* dark winter blue */
-}
-
-/* Start over / logout button */
-.logout {
-  margin-top: 20px;
-  background: #29b6f6; /* icy blue */
-  color: #fff;
-}
-
-.logout:hover {
-  background: #03a9f4;
-}
-/* Page Title */
-.page-title {
-  position: absolute;
-  top: 25px;
-  font-size: 2.6em;
-  font-weight: 700;
-  color: #0277bd; /* winter blue */
-  letter-spacing: 2px;
-  text-shadow:
-    2px 2px 0 #ffffff,
-    0 0 10px rgba(255,255,255,0.8);
-}
-
-/* Small screens */
-@media (max-width: 500px) {
-  .page-title {
-    font-size: 2em;
-    text-align: center;
-    padding: 0 10px;
-  }
+/* Highlight your name and assigned person */
+.reveal-name strong {
+  color: #0277bd; /* winter blue for names */
 }

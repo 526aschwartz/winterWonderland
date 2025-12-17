@@ -5,7 +5,8 @@ createApp({
     return {
       participants: [],
       newParticipant: { name: "", wishlist: "" },
-      started: false
+      started: false,
+      selectedParticipant: null
     };
   },
 
@@ -22,7 +23,12 @@ createApp({
         return;
       }
 
-      this.participants.push({ name, wishlist, assignedTo: null });
+      this.participants.push({
+        name,
+        wishlist,
+        assignedTo: null
+      });
+
       this.newParticipant.name = "";
       this.newParticipant.wishlist = "";
     },
@@ -33,28 +39,39 @@ createApp({
 
     startGame() {
       if (this.participants.length < 2) {
-        alert("You need at least 2 participants");
+        alert("Need at least 2 people");
         return;
       }
 
-      // Shuffle array for random assignment
-      const shuffled = [...this.participants];
-      for (let i = shuffled.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+      let shuffled;
+      let valid = false;
+
+      // Shuffle until no one is assigned themselves
+      while (!valid) {
+        shuffled = [...this.participants];
+        for (let i = shuffled.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+        }
+        valid = !this.participants.some((p, i) => p.name === shuffled[i].name);
       }
 
       // Assign Secret Santa
-      for (let i = 0; i < this.participants.length; i++) {
-        this.participants[i].assignedTo = shuffled[(i + 1) % shuffled.length];
-      }
+      this.participants.forEach((p, i) => {
+        p.assignedTo = shuffled[i];
+      });
 
       this.started = true;
     },
 
+    selectParticipant(participant) {
+      this.selectedParticipant = participant;
+    },
+
     resetGame() {
-      this.participants.forEach(p => (p.assignedTo = null));
+      this.participants = [];
       this.started = false;
+      this.selectedParticipant = null;
     }
   }
 }).mount("#app");
