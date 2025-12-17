@@ -39,14 +39,14 @@ createApp({
 
     startGame() {
       if (this.participants.length < 2) {
-        alert("Need at least 2 people");
+        alert("Need at least 2 people to play");
         return;
       }
 
+      // Assign Secret Santa
       let shuffled;
       let valid = false;
 
-      // Shuffle until no one is assigned themselves
       while (!valid) {
         shuffled = [...this.participants];
         for (let i = shuffled.length - 1; i > 0; i--) {
@@ -56,7 +56,6 @@ createApp({
         valid = !this.participants.some((p, i) => p.name === shuffled[i].name);
       }
 
-      // Assign Secret Santa
       this.participants.forEach((p, i) => {
         p.assignedTo = shuffled[i];
       });

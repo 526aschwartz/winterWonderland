@@ -1,6 +1,6 @@
 /* Body */
 body {
-  background: linear-gradient(to bottom, #e0f7fa, #b2ebf2); /* soft winter blues */
+  background: linear-gradient(to bottom, #e0f7fa, #b2ebf2);
   color: #1a1a1a;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   display: flex;
@@ -16,7 +16,7 @@ body {
   top: 20px;
   font-size: 2.6em;
   font-weight: 700;
-  color: #0277bd; /* winter blue */
+  color: #0277bd;
   letter-spacing: 2px;
   text-shadow: 2px 2px 0 #ffffff, 0 0 10px rgba(255,255,255,0.8);
 }
@@ -30,7 +30,7 @@ body {
   width: 360px;
   text-align: center;
   box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-  border: 2px solid #ffd54f; /* subtle gold */
+  border: 2px solid #ffd54f;
 }
 
 /* Headings */
@@ -69,6 +69,13 @@ button {
 
 button:hover {
   background: #ffd54f;
+}
+
+/* Participant count */
+.participant-count {
+  font-weight: bold;
+  margin-bottom: 15px;
+  color: #0277bd;
 }
 
 /* Participant list */
@@ -113,6 +120,17 @@ ul li button {
   margin-bottom: 20px;
 }
 
+/* Shuffle animation */
+.name-grid.shuffling .name-card {
+  animation: shuffle 0.2s infinite alternate;
+}
+
+@keyframes shuffle {
+  0% { transform: translateX(-3px); }
+  50% { transform: translateX(3px); }
+  100% { transform: translateX(-3px); }
+}
+
 /* Name cards */
 .name-card {
   background: #e3f2fd;
@@ -137,20 +155,24 @@ ul li button {
   border-radius: 15px;
   padding: 20px;
   border: 2px solid #ffd54f;
-  margin-top: 10px;
+  margin-top: 15px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
   text-align: center;
 }
 
 /* Reveal participant names */
 .reveal-name {
-  font-size: 1.4em;
+  font-size: 1.2em;
   font-weight: bold;
-  color: #ffb74d; /* gold accent for visibility */
   margin-bottom: 10px;
 }
 
-/* Highlight your name and assigned person */
-.reveal-name strong {
-  color: #0277bd; /* winter blue for names */
+/* Your name */
+.reveal-name .your-name {
+  color: #0277bd;
+}
+
+/* Assigned person name */
+.reveal-name .assigned-name {
+  color: #ff6f00;
 }

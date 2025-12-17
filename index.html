@@ -8,18 +8,23 @@
 </head>
 <body>
 
+  <!-- Page Title -->
   <div class="page-title">
     ❄️ Secret Santa Picker 🎁
   </div>
 
   <div id="app">
-    <!-- Add participants -->
+    <!-- Setup / Add participants -->
     <div v-if="!started" class="login-box">
       <h1>🎄 Secret Santa Setup</h1>
 
       <input type="text" placeholder="Your Name" v-model="newParticipant.name" />
       <input type="text" placeholder="Gift Wishlist (comma separated)" v-model="newParticipant.wishlist" />
       <button @click="addParticipant">Add Participant</button>
+
+      <p class="participant-count">
+        Participants added: {{ participants.length }}
+      </p>
 
       <ul>
         <li v-for="(p, index) in participants" :key="index">
@@ -36,10 +41,11 @@
       <h1>🎅 Pick Your Name</h1>
       <p class="subtitle">Click your name to see who you have</p>
 
+      <!-- Name grid -->
       <div class="name-grid">
         <div
           v-for="(p, index) in participants"
-          :key="index"
+          :key="p.name"
           class="name-card"
           @click="selectParticipant(p)"
         >
