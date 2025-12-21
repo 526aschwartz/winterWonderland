@@ -8,43 +8,43 @@
 </head>
 <body>
 
-  <!-- Page Title -->
   <div class="page-title">
-    ❄️ Secret Santa Picker 🎁
+    🎄 Secret Santa Picker
   </div>
 
   <div id="app">
-    <!-- Setup / Add participants -->
+    <!-- SETUP SCREEN -->
     <div v-if="!started" class="login-box">
-      <h1>🎄 Secret Santa Setup</h1>
+      <h1>🎅 Secret Santa Setup</h1>
 
       <input type="text" placeholder="Your Name" v-model="newParticipant.name" />
+      <input type="password" placeholder="Create Password" v-model="newParticipant.password" />
       <input type="text" placeholder="Gift Wishlist (comma separated)" v-model="newParticipant.wishlist" />
+
       <button @click="addParticipant">Add Participant</button>
 
-      <p class="participant-count">
-        Participants added: {{ participants.length }}
-      </p>
+      <p>Participants added: {{ participants.length }}</p>
 
       <ul>
         <li v-for="(p, index) in participants" :key="index">
-          {{ p.name }} - Wishlist: {{ p.wishlist.join(", ") }}
+          {{ p.name }}
           <button @click="removeParticipant(index)">Remove</button>
         </li>
       </ul>
 
-      <button v-if="participants.length > 1" @click="startGame">Start Secret Santa</button>
+      <button v-if="participants.length > 1" @click="startGame">
+        Start Secret Santa
+      </button>
     </div>
 
-    <!-- Secret Santa assignments -->
+    <!-- GAME SCREEN -->
     <div v-else class="secret-box">
-      <h1>🎅 Pick Your Name</h1>
-      <p class="subtitle">Click your name to see who you have</p>
+      <h1>🎄 Pick Your Name</h1>
+      <p>Click your name and enter your password</p>
 
-      <!-- Name grid -->
       <div class="name-grid">
         <div
-          v-for="(p, index) in participants"
+          v-for="p in participants"
           :key="p.name"
           class="name-card"
           @click="selectParticipant(p)"
@@ -53,12 +53,11 @@
         </div>
       </div>
 
-      <!-- Reveal box -->
       <div v-if="selectedParticipant" class="reveal-box">
-        <h2>🎁 Secret Santa Assignment</h2>
-        <p class="reveal-name">
-          You (<span class="your-name">{{ selectedParticipant.name }}</span>) are Secret Santa for: 
-          <span class="assigned-name">{{ selectedParticipant.assignedTo.name }}</span>
+        <h2>🎁 Your Assignment</h2>
+        <p>
+          You are Secret Santa for:
+          <strong>{{ selectedParticipant.assignedTo.name }}</strong>
         </p>
 
         <h3>Wishlist</h3>
